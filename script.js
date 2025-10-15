@@ -138,7 +138,7 @@ const initGame = () => {
       snake
         .getBody()
         .some(
-          (segment) => segment[0] === food.getX() && segment[1] === food.getY()
+          (segment) => segment[0] === food.getX() && segment[1] === food.getY(),
         )
     );
     score++;
@@ -175,9 +175,6 @@ const initGame = () => {
   }
   playBoard.innerHTML = htmlMarkup;
 };
-// const intervalID = setInterval(() => {
-//   initGame();
-// }, 125);
 
 document.addEventListener("keydown", (e) => {
   if (!intervalID && (e.code === "Space" || e.code === "Enter")) {
@@ -188,6 +185,19 @@ document.addEventListener("keydown", (e) => {
     snake.setInitialVelocity([vx, vy]);
     startGame();
   }
+
+  if (moveLocked) return; // already moving
+  snake.setVelocity(e);
+  moveLocked = true;
+});
+
+startBtn.addEventListener("click", (e) => {
+  console.log(e);
+  startBtn.style.display = "none"; // hide button
+  moveLocked = false;
+  const [vx, vy] = getInitialVelocity();
+  snake.setInitialVelocity([vx, vy]);
+  startGame();
 
   if (moveLocked) return; // already moving
   snake.setVelocity(e);
