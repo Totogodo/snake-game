@@ -119,7 +119,7 @@ function renderScoreImages(scoreValue, targetElement, variant = "") {
 
   for (let digit of scoreStr) {
     const img = document.createElement("img");
-    img.src = `/game/assets/${digit}${variant}.png`;
+    img.src = `assets/${digit}${variant}.png`;
     img.alt = digit;
     img.height = 30;
     targetElement.appendChild(img);
